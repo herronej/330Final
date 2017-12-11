@@ -2,9 +2,9 @@ program highc
 
     integer :: a, b
     integer,parameter :: k32 = selected_int_kind(32)
-    integer(kind=8)::x, sequence_size, MAX, i, collatz_func_max, highest, minv, maxv
+    integer(kind=16)::x, sequence_size, MAX, i, collatz_func_max, highest, minv, maxv
     external collatz_func
-    integer(kind=8), dimension(10,2)::max_nums
+    integer(kind=16), dimension(10,2)::max_nums
 
     print*,"Minimum Value: "
     read*, minv
@@ -17,13 +17,11 @@ program highc
     highest = -1
 
     do i = minv, maxv
-        !x = i
         sequence_size = 0
         sequence_size = collatz_func_max(i)
         if(sequence_size > highest) then
             highest = sequence_size
         end if
-        !print*, sequence_size
     end do
 
     print*, highest
@@ -31,8 +29,8 @@ program highc
 
 end program highc
 
-recursive integer(kind=8) function collatz_func_max(x) result (val)
-    integer(kind=8)::x
+recursive integer(kind=16) function collatz_func_max(x) result (val)
+    integer(kind=16)::x
 
     if(x /= 1) then
         if(iand(x,1)==1) then
